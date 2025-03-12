@@ -1,0 +1,15 @@
+id: Lfi-Vuln-Params
+
+info:
+  name: detect possible lfi parameters 
+  author: super403
+  severity: info
+  tags: lfi,top10
+
+file:
+  - extensions:
+      - all
+    extractors:
+      - type: regex
+        regex:
+          - "(?i)(\\?|\\&)(((([a-z0-9-_])+(-|_)+))|(-|_))?(file|local|reference|return|window|val|feed|callback|data|host|document|folder|root|path|pg|page|style|pdf|template|doc|cat|dir|action|board|date|detail|download|view|img|image|src|conf|url|uri|include|content|layout|locate|show|site)="

@@ -1,0 +1,16 @@
+id: SSTI-Vuln-Params
+
+info:
+  name: detect possible XSS parameters 
+  author: super403
+  severity: info
+  tags: ssti,top10
+
+file:
+  - extensions:
+      - all
+
+    extractors:
+      - type: regex
+        regex:
+          - "(?i)(\\?|\\&)(((([a-z0-9-_])+(-|_)+))|(-|_))?(template|preview|id|view|activity|name|content|redirect)="

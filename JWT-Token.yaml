@@ -1,0 +1,18 @@
+id: JWT-Token
+
+info:
+  name: JWT Token Disclosure
+  author: super403
+  severity: info
+  tags: JTW,token
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}"
+
+    extractors:
+      - type: regex
+        part: body
+        regex:
+          - 'eyJ[a-zA-Z0-9]{10,}\.eyJ[a-zA-Z0-9]{10,}\.[a-zA-Z0-9_\-]{10,}'

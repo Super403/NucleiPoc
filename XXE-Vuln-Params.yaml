@@ -1,0 +1,17 @@
+id: XXE-Vuln-Params
+
+info:
+  name: XXE-Vuln-Params
+  author: super403
+  severity: info
+  tags: xxe,top10
+
+file:
+  - extensions:
+      - all
+
+    extractors:
+      - type: regex
+        regex:
+          - "(?i)(\\?|\\&)([a-z0-9-_]+)=<"
+          - "(?i)(\\?|\\&)(([a-z0-9]+)((-|_)+))?(xml)=<"

