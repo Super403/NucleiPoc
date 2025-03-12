@@ -1,0 +1,30 @@
+id: MySQL-Detect
+info:
+  name: MySQL-Detect
+  author: super403
+  severity: info
+  description: |
+    MySQL instance was detected.
+  classification:
+    cvss-metrics: CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:N
+    cwe-id: CWE-200
+  metadata:
+    max-request: 1
+    shodan-query: product:"MySQL"
+    verified: true
+  tags: mysql,db
+
+tcp:
+  - inputs:
+      - data: "\n"
+
+    host:
+      - "{{Hostname}}"
+    port: 3306
+
+    matchers:
+      - type: word
+        part: body
+        words:
+          - "mysql"
+        case-insensitive: true

@@ -1,0 +1,26 @@
+id: Default-Apache-Shiro
+info:
+  name: Apache Shiro Default Page
+  author: super403
+  severity: info
+  metadata:
+    verified: true
+    max-request: 1
+    shodan-query: title:"Apache Shiro Quickstart"
+  tags: apache,shiro
+
+http:
+  - method: GET
+    path:
+      - '{{BaseURL}}'
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        part: body
+        words:
+          - "<title>Apache Shiro Quickstart</title>"
+
+      - type: status
+        status:
+          - 200

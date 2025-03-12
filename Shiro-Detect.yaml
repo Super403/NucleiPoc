@@ -1,0 +1,21 @@
+id: Shiro-Detect
+info:
+  name: Shiro-Detect
+  author: super403
+  severity: info
+  tags: shiro
+
+http:
+  - method: GET
+    path:
+      - '{{BaseURL}}'
+
+    headers:
+      Cookie: JSESSIONID={{randstr}};rememberMe=123;
+    host-redirects: true
+    max-redirects: 2
+    matchers:
+      - type: word
+        part: header
+        words:
+          - "rememberMe=deleteMe"
